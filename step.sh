@@ -7,6 +7,9 @@ function print_configuration() {
     echo "Configuration:"
     echo "PROJECT_DIR: ${PROJECT_DIR}"
     echo "TEST_NAME: ${TEST_NAME}"
+    echo "CONFIGURATION: ${CONFIGURATION}"
+    echo "BUILD_PATH: ${BUILD_PATH}"
+    echo "SKIP_BUILD: ${SKIP_BUILD}"
     echo "OUTPUT_DIR: ${OUTPUT_DIR}"
     echo "TEST_RESULT: ${TEST_RESULT}"
     echo "CODE_COVERAGE_RESULT: ${CODE_COVERAGE_RESULT}"
@@ -24,11 +27,18 @@ fi
 
 print_configuration
 
-# Run test
-(cd "${PROJECT_DIR}" ; swift test --enable-code-coverage --parallel --xunit-output "${TEST_RESULT}")
+SKIP_BUILD_FLAG=""
+if [ "${SKIP_BUILD}" = "YES" ]; then
+    SKIP_BUILD_FLAG="--skip-build"
+fi
+
+echo "Running tests"
+BUILD_COMMAND="swift test ${SKIP_BUILD_FLAG} --enable-code-coverage --parallel --configuration ${CONFIGURATION} --xunit-output ${TEST_RESULT} --build-path ${BUILD_PATH}"
+echo "${BUILD_COMMAND}"
+(cd "${PROJECT_DIR}" ; sh -c "${BUILD_COMMAND}")
 
 # Copy code coverage
-cp "$(swift test --show-codecov-path)" "${CODE_COVERAGE_RESULT}"
+cp "$(cd "${PROJECT_DIR}" ; swift test --show-codecov-path)" "${CODE_COVERAGE_RESULT}"
 
 # Creating the test-info.json file with the name of the test run defined:
 echo "{\"test-name\":\"${TEST_NAME}\"}" >> "${OUTPUT_DIR}/test-info.json"
