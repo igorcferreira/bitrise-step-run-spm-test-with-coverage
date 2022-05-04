@@ -85,6 +85,13 @@ workflows:
         inputs:
         - TEST_NAME: BitriseTest
         - PROJECT_DIR: $BITRISE_SOURCE_DIR
+    - path::./git:
+        title: Re-run Step Test without build
+        description: ""
+        inputs:
+        - TEST_NAME: BitriseTest
+        - PROJECT_DIR: $BITRISE_SOURCE_DIR
+        - SKIP_BUILD: 'YES'
     - script:
         title: Run step test
         inputs:
