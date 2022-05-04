@@ -14,6 +14,17 @@ trigger_map:
 - tag: '*'
   workflow: share-this-step
 workflows:
+  _configure_git:
+    steps:
+    - script:
+        title: Config git user
+        run_if: .IsCI
+        inputs:
+        - content: |-
+            #!/bin/bash
+            set -ex
+            git config --global user.name "${SHARE_ACTION_USER_NAME}"
+            git config --global user.email "${SHARE_ACTION_USER_EMAIL}"
   audit-this-step:
     before_run:
     - test
@@ -49,6 +60,7 @@ workflows:
       the way described in the guide printed at the end of the process.
     before_run:
     - audit-this-step
+    - _configure_git
     envs:
     - MY_STEPLIB_REPO_FORK_GIT_URL: $MY_STEPLIB_REPO_FORK_GIT_URL
     - BITRISE_STEP_ID: $BITRISE_STEP_ID
@@ -89,7 +101,7 @@ workflows:
         title: Re-run Step Test without build
         description: ""
         inputs:
-        - TEST_NAME: BitriseTest
+        - TEST_NAME: BitriseTestReRun
         - PROJECT_DIR: $BITRISE_SOURCE_DIR
         - SKIP_BUILD: 'YES'
     - script:
