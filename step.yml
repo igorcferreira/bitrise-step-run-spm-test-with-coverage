@@ -69,6 +69,14 @@ inputs:
         Path with the Swift Package Manager code
       is_expand: true
       is_required: true
+  - TEST_NAME: "SwiftTest"
+    opts:
+      title: "Test name"
+      summary: Name that will be used in the test information and generated files
+      description: |
+        Name that will be used in the test information and generated files
+      is_expand: true
+      is_required: true
 
 outputs:
   - TEST_RESULT:

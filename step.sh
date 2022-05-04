@@ -1,22 +1,41 @@
-#!/bin/bash
-set -ex
+#!/usr/bin/env bash
+# fail if any commands fails
+set -e
 
-echo "This is the value specified for the input 'example_step_input': ${example_step_input}"
+# Helper functions
+function print_configuration() {
+    echo "Configuration:"
+    echo "PROJECT_DIR: ${PROJECT_DIR}"
+    echo "TEST_NAME: ${TEST_NAME}"
+    echo "OUTPUT_DIR: ${OUTPUT_DIR}"
+    echo "TEST_RESULT: ${TEST_RESULT}"
+    echo "CODE_COVERAGE_RESULT: ${CODE_COVERAGE_RESULT}"
+}
 
-#
-# --- Export Environment Variables for other Steps:
-# You can export Environment Variables for other Steps with
-#  envman, which is automatically installed by `bitrise setup`.
-# A very simple example:
-envman add --key EXAMPLE_STEP_OUTPUT --value 'the value you want to share'
-# Envman can handle piped inputs, which is useful if the text you want to
-# share is complex and you don't want to deal with proper bash escaping:
-#  cat file_with_complex_input | envman add --KEY EXAMPLE_STEP_OUTPUT
-# You can find more usage examples on envman's GitHub page
-#  at: https://github.com/bitrise-io/envman
+# Prepare environment
+# Creating the sub-directory for the test run within the BITRISE_TEST_RESULT_DIR:
+OUTPUT_DIR="${BITRISE_TEST_RESULT_DIR}/SwiftTest"
+TEST_RESULT="${OUTPUT_DIR}/${TEST_NAME}.xml"
+CODE_COVERAGE_RESULT="${OUTPUT_DIR}/${TEST_NAME}_codecoverage.json"
 
-#
-# --- Exit codes:
-# The exit code of your Step is very important. If you return
-#  with a 0 exit code `bitrise` will register your Step as "successful".
-# Any non zero exit code will be registered as "failed" by `bitrise`.
+if [ ! -d "${OUTPUT_DIR}" ]; then
+    mkdir "${OUTPUT_DIR}"
+fi
+
+print_configuration
+
+# Reseting the package
+swift package reset
+
+# Run test
+swift test --enable-code-coverage --parallel --xunit-output "${TEST_RESULT}"
+
+# Copy code coverage
+cp "$(swift test --show-codecov-path)" "${CODE_COVERAGE_RESULT}"
+
+# Creating the test-info.json file with the name of the test run defined:
+echo "{\"test-name\":\"${TEST_NAME}\"}" >> "${OUTPUT_DIR}/test-info.json"
+
+# Exporting result to artefacts
+cp "${TEST_RESULT}" "${BITRISE_DEPLOY_DIR}/${TEST_NAME}.xml"
+cp "${CODE_COVERAGE_RESULT}" "${BITRISE_DEPLOY_DIR}/${TEST_NAME}_codecoverage.json"
