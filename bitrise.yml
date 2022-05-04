@@ -3,9 +3,9 @@ default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
 project_type: ""
 app:
   envs:
-  - BITRISE_STEP_ID: run-swift-test
+  - BITRISE_STEP_ID: run-spm-test-with-coverage
   - BITRISE_STEP_VERSION: $BITRISE_GIT_TAG
-  - BITRISE_STEP_GIT_CLONE_URL: https://github.com/igorcferreira/bitrise-step-run-swift-test.git
+  - BITRISE_STEP_GIT_CLONE_URL: https://github.com/igorcferreira/bitrise-step-run-spm-test-with-coverage.git
   - MY_STEPLIB_REPO_FORK_GIT_URL: $MY_STEPLIB_REPO_FORK_GIT_URL
 trigger_map:
 - pull_request_source_branch: '*'

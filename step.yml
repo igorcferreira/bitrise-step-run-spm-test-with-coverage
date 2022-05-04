@@ -8,14 +8,14 @@
 # - Bitrise CLI guides: http://devcenter.bitrise.io/bitrise-cli/
 
 title: |-
-  Run Swift Test
+  Run Swift Test With Code Coverage
 summary: |
-  Step that runs "swift test" in the local directory and export the results into Bitrise Test Plugin
+  Step that runs "swift test" in the local directory and export the results into Bitrise Test Plugin, including code coverage
 description: |
-  Step that runs "swift test" in the local directory and export the results into Bitrise Test Plugin
-website: https://github.com/igorcferreira/bitrise-step-run-swift-test
-source_code_url: https://github.com/igorcferreira/bitrise-step-run-swift-test
-support_url: https://github.com/igorcferreira/bitrise-step-run-swift-test/issues
+  Step that runs "swift test" in the local directory and export the results into Bitrise Test Plugin, including code coverage
+website: https://github.com/igorcferreira/bitrise-step-run-spm-test-with-coverage
+source_code_url: https://github.com/igorcferreira/bitrise-step-run-spm-test-with-coverage
+support_url: https://github.com/igorcferreira/bitrise-step-run-spm-test-with-coverage/issues
 host_os_tags:
   - osx-10.10
 

@@ -5,7 +5,7 @@ Step that runs "swift test" in the local directory and export the results into B
 ## How to use this Step
 
 ```yml
-- git::https://github.com/igorcferreira/bitrise-step-run-swift-test.git@main:
+- git::https://github.com/igorcferreira/bitrise-step-run-spm-test-with-coverage.git@main:
    title: Run Swift Package Manager Tests
    inputs:
    - TEST_NAME: BitriseTest
