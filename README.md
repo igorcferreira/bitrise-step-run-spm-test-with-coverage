@@ -1,4 +1,4 @@
-# Run Swift Test
+# Run Swift Test [![Build Status](https://app.bitrise.io/app/6db4b5a23df77ef3/status.svg?token=sh49ITq9wR-JvHYPuepTMA&branch=main)](https://app.bitrise.io/app/6db4b5a23df77ef3)
 
 Step that runs "swift test" in the local directory and export the results into Bitrise Test Plugin
 

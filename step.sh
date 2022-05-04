@@ -39,3 +39,6 @@ echo "{\"test-name\":\"${TEST_NAME}\"}" >> "${OUTPUT_DIR}/test-info.json"
 # Exporting result to artefacts
 cp "${TEST_RESULT}" "${BITRISE_DEPLOY_DIR}/${TEST_NAME}.xml"
 cp "${CODE_COVERAGE_RESULT}" "${BITRISE_DEPLOY_DIR}/${TEST_NAME}_codecoverage.json"
+
+envman add --key "TEST_RESULT" --value "${BITRISE_DEPLOY_DIR}/${TEST_NAME}.xml"
+envman add --key "CODE_COVERAGE_RESULT" --value "${BITRISE_DEPLOY_DIR}/${TEST_NAME}_codecoverage.json"

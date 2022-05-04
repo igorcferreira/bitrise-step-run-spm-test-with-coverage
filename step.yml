@@ -85,3 +85,9 @@ outputs:
       summary: XML file with the result of the tests
       description: |
         XML file with the result of the tests
+  - CODE_COVERAGE_RESULT:
+    opts:
+      title: "Code Coverage result"
+      summary: JSON file with the result of the code coverage report
+      description: |
+        JSON file with the result of the code coverage report
