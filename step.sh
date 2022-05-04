@@ -25,10 +25,10 @@ fi
 print_configuration
 
 # Reseting the package
-swift package reset
+(cd "${PROJECT_DIR}" ; swift package reset)
 
 # Run test
-swift test --enable-code-coverage --parallel --xunit-output "${TEST_RESULT}"
+(cd "${PROJECT_DIR}" ; swift test --enable-code-coverage --parallel --xunit-output "${TEST_RESULT}")
 
 # Copy code coverage
 cp "$(swift test --show-codecov-path)" "${CODE_COVERAGE_RESULT}"
