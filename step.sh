@@ -24,9 +24,6 @@ fi
 
 print_configuration
 
-# Reseting the package
-(cd "${PROJECT_DIR}" ; swift package reset)
-
 # Run test
 (cd "${PROJECT_DIR}" ; swift test --enable-code-coverage --parallel --xunit-output "${TEST_RESULT}")
 
