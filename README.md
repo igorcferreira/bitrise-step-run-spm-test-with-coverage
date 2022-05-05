@@ -20,3 +20,19 @@ This step will run the package tests and expose the test result and code coverag
 
 - TEST_RESULT: XML file with the result of the tests
 - CODE_COVERAGE_RESULT: JSON file with the result of the code coverage report
+
+## Supported platforms
+
+By default, the tests will run on macOS, but a different sdk can be selected by changing the `SDK` and `DESTINATION` inputs. Example:
+
+```yml
+- git::https://github.com/igorcferreira/bitrise-step-run-spm-test-with-coverage.git@main:
+   title: Run Swift Package Manager Tests
+   inputs:
+   - TEST_NAME: BitriseTest
+   - PROJECT_DIR: $BITRISE_SOURCE_DIR
+   - SKIP_BUILD: 'NO'
+   - REPORTER: junit
+   - SDK: 'iphonesimulator'
+   - DESTINATION: 'platform=iOS Simulator,name=iPhone 8 Plus'
+```
