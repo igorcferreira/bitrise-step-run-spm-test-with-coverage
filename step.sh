@@ -23,7 +23,8 @@ function print_configuration() {
 OUTPUT_DIR="${BITRISE_TEST_RESULT_DIR}/SwiftTest"
 CODE_COVERAGE_FILE_NAME="${TEST_NAME}_codecoverage.json"
 CODE_COVERAGE_RESULT="${OUTPUT_DIR}/${CODE_COVERAGE_FILE_NAME}"
-TEST_ARCHIVE="$(pwd)/test.xcresult"
+TEST_ARCHIVE_NAME="${TEST_NAME}_codecoverage.xcresult"
+TEST_ARCHIVE="${OUTPUT_DIR}/${TEST_ARCHIVE_NAME}"
 
 if [ ! -d "${OUTPUT_DIR}" ]; then
     mkdir "${OUTPUT_DIR}"
@@ -81,13 +82,9 @@ xcpretty --color --report '${REPORTER}' --output '${TEST_RESULT}'"
 echo "{\"test-name\":\"${TEST_NAME}\"}" >> "${OUTPUT_DIR}/test-info.json"
 
 # Exporting result to artefacts
+cp -r "${TEST_ARCHIVE}" "${BITRISE_DEPLOY_DIR}/${TEST_ARCHIVE_NAME}"
 cp "${TEST_RESULT}" "${BITRISE_DEPLOY_DIR}/${TEST_FILE_NAME}"
 cp "${CODE_COVERAGE_RESULT}" "${BITRISE_DEPLOY_DIR}/${CODE_COVERAGE_FILE_NAME}"
 
 envman add --key "TEST_RESULT" --value "${BITRISE_DEPLOY_DIR}/${TEST_FILE_NAME}"
 envman add --key "CODE_COVERAGE_RESULT" --value "${BITRISE_DEPLOY_DIR}/${CODE_COVERAGE_FILE_NAME}"
-
-echo "Cleaning environment"
-if [ -d "${TEST_ARCHIVE}" ]; then
-    rm -rf "${TEST_ARCHIVE}"
-fi
