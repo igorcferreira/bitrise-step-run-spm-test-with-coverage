@@ -14,7 +14,7 @@ summary: |
 description: |
   This step uses xcodebuild & xcpretty to run the macOS tests for the Swift Package Manager. The final files are
   output in a structure compatible with the "Test Report" plugin and can be configured to be JUnit or HTML as output,
-  so the generated files are compatible with tools like Dagger.
+  so the generated files are compatible with tools like Danger.
   The Code coverage is always exported as a JSON file.
 website: https://github.com/igorcferreira/bitrise-step-run-spm-test-with-coverage
 source_code_url: https://github.com/igorcferreira/bitrise-step-run-spm-test-with-coverage

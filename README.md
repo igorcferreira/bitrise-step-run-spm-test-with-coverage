@@ -1,6 +1,6 @@
 # Run Swift Test [![Build Status](https://app.bitrise.io/app/6db4b5a23df77ef3/status.svg?token=sh49ITq9wR-JvHYPuepTMA&branch=main)](https://app.bitrise.io/app/6db4b5a23df77ef3)
 
-This step uses xcodebuild & xcpretty to run the macOS tests for the Swift Package Manager. The final files are output in a structure compatible with the "Test Report" plugin and can be configured to be JUnit or HTML as output, so the generated files are compatible with tools like Dagger.
+This step uses xcodebuild & xcpretty to run the macOS tests for the Swift Package Manager. The final files are output in a structure compatible with the "Test Report" plugin and can be configured to be JUnit or HTML as output, so the generated files are compatible with tools like Danger.
 
 The Code coverage is always exported as a JSON file.
 
