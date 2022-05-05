@@ -56,7 +56,8 @@ deps:
   - name: git
   apt_get:
   - name: git
-
+  check_only:
+  - name: xcode
 
 toolkit:
   bash:
@@ -88,24 +89,13 @@ inputs:
         Path where the build files will be stored
       is_expand: true
       is_required: true
-  - CONFIGURATION: "debug"
-    opts:
-      deprecated: true
-      title: "Build Configuration (Deprecated)"
-      summary: "Allows setting either Release or Debug for the build action (Deprecated)"
-      description: |
-        Allows setting either Release or Debug for the build action (Deprecated)
-      is_expand: true
-      is_required: false
-      value_options:
-      - release
-      - debug
   - SKIP_BUILD: "NO"
     opts:
       title: "Run test without building"
       summary: "Run test without building"
       description: |
         Run test without building
+      category: Build configuration
       is_expand: true
       is_required: true
       value_options:
@@ -117,6 +107,7 @@ inputs:
       summary: "Choose between a junit report or a html report"
       description: |
         Choose between a junit report or a html report
+      category: xcpretty
       is_expand: true
       is_required: true
       value_options:
@@ -128,6 +119,7 @@ inputs:
       summary: "Select which sdk will be tested"
       description: |
         Select which sdk will be tested
+      category: Test Platform
       is_expand: true
       is_required: true
       value_options:
@@ -142,8 +134,22 @@ inputs:
       summary: "Choose which destination will be used to run the tests"
       description: |
         Choose which destination will be used to run the tests
+      category: Test Platform
       is_expand: true
       is_required: true
+  - CONFIGURATION: "debug"
+    opts:
+      deprecated: true
+      title: "Build Configuration (Deprecated)"
+      summary: "Allows setting either Release or Debug for the build action (Deprecated)"
+      description: |
+        Allows setting either Release or Debug for the build action (Deprecated)
+      category: Deprecated
+      is_expand: true
+      is_required: false
+      value_options:
+      - release
+      - debug
 
 outputs:
   - TEST_RESULT:
@@ -152,9 +158,11 @@ outputs:
       summary: XML file with the result of the tests
       description: |
         XML file with the result of the tests
+      is_dont_change_value: true
   - CODE_COVERAGE_RESULT:
     opts:
       title: "Code Coverage result"
       summary: JSON file with the result of the code coverage report
       description: |
         JSON file with the result of the code coverage report
+      is_dont_change_value: true
