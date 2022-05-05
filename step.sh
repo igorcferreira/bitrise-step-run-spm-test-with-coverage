@@ -12,6 +12,8 @@ function print_configuration() {
     echo "SKIP_BUILD: ${SKIP_BUILD}"
     echo "OUTPUT_DIR: ${OUTPUT_DIR}"
     echo "REPORTER: ${REPORTER}"
+    echo "SDK: ${SDK}"
+    echo "DESTINATION: ${DESTINATION}"
     echo "TEST_RESULT: ${TEST_RESULT}"
     echo "CODE_COVERAGE_RESULT: ${CODE_COVERAGE_RESULT}"
 }
@@ -65,10 +67,10 @@ BUILD_COMMAND="xcodebuild ${RUN_ACTION} \
 -scheme '${PACKAGE_NAME}' \
 -configuration 'Debug' \
 -enableCodeCoverage YES \
--sdk macosx \
+-sdk '${SDK}' \
 -resultBundlePath '${TEST_ARCHIVE}' \
 -derivedDataPath '${BUILD_PATH}' \
--destination 'platform=macOS' | \
+-destination '${DESTINATION}' | \
 xcpretty --color --report '${REPORTER}' --output '${TEST_RESULT}'"
 (cd "${PROJECT_DIR}" ; sh -c "${BUILD_COMMAND}")
 

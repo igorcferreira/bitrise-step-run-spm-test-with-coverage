@@ -104,6 +104,15 @@ workflows:
         - TEST_NAME: BitriseTestReRun
         - PROJECT_DIR: $BITRISE_SOURCE_DIR
         - SKIP_BUILD: 'YES'
+    - path::./git:
+        title: Run iOS test
+        description: ""
+        inputs:
+        - TEST_NAME: BitriseTestiOS
+        - PROJECT_DIR: $BITRISE_SOURCE_DIR
+        - SKIP_BUILD: 'NO'
+        - SDK: 'iphonesimulator'
+        - DESTINATION: 'platform=iOS Simulator,name=iPhone 8 Plus'
     - script:
         title: Run step test
         inputs:

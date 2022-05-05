@@ -32,6 +32,7 @@ host_os_tags:
 # https://github.com/bitrise-io/bitrise/blob/master/_docs/step-development-guideline.md
 #
 project_type_tags:
+  - ios
   - macos
 #   - android
 #   - xamarin
@@ -121,6 +122,28 @@ inputs:
       value_options:
       - junit
       - html
+  - SDK: 'macosx'
+    opts:
+      title: "Build SDK"
+      summary: "Select which sdk will be tested"
+      description: |
+        Select which sdk will be tested
+      is_expand: true
+      is_required: true
+      value_options:
+      - macosx
+      - appletvsimulator
+      - iphonesimulator
+      - watchsimulator
+      - driverkit
+  - DESTINATION: 'platform=macOS'
+    opts:
+      title: "Run test destination"
+      summary: "Choose which destination will be used to run the tests"
+      description: |
+        Choose which destination will be used to run the tests
+      is_expand: true
+      is_required: true
 
 outputs:
   - TEST_RESULT:
